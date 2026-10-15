@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SurfaceGuard AI: Session 1 Master Class</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- KaTeX CSS and synchronous JS for immediate formula rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="if(window.renderMath) renderMath();"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    .nav-module-btn.active {
+      background-color: #4f46e5;
+      color: #ffffff;
+      box-shadow: 0 2px 8px -1px rgba(79, 70, 229, 0.35);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 4px;
+      background: #e2e8f0;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #4f46e5;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(79, 70, 229, 0.4);
+    }
+    .grid-cell {
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 9px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .grid-cell.active {
+      background-color: #4f46e5;
+      color: #ffffff;
+      box-shadow: 0 0 6px rgba(79, 70, 229, 0.6);
+    }
+    .grid-cell.inactive {
+      background-color: #1e293b;
+      color: #64748b;
+    }
+    .grid-cell.inactive:hover {
+      background-color: #334155;
+      color: #cbd5e1;
+    }
+    .tape-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      padding: 1px 4px;
+      border-radius: 3px;
+      transition: all 0.15s ease;
+    }
+    .tape-chip.active {
+      background-color: #4f46e5;
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .tape-chip.inactive {
+      background-color: #f1f5f9;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+  <!-- ================= TOP STICKY HEADER ================= -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 px-6 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Project Branding -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-sm">
+          <i data-lucide="shield-check" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-sm font-extrabold text-slate-900 tracking-tight">SurfaceGuard AI</h1>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              Live Session 1
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-mono">BSDA2001P • Vision Foundations & Mask Mechanics</p>
+        </div>
+      </div>
+
+      <!-- Quick Section Jump Tabs -->
+      <nav id="module-tabs" class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80 text-xs font-semibold text-slate-600 overflow-x-auto custom-scrollbar">
+        <!-- Injected via script -->
+      </nav>
+
+      <!-- Utilities -->
+      <div class="flex items-center gap-2">
+        <button onclick="toggleNotesDrawer()" id="btn-notes" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-indigo-600"></i>
+          <span>Mentor Notes (M)</span>
+        </button>
+        <button onclick="toggleFullscreen()" class="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs shadow-sm" title="Toggle Fullscreen (F)">
+          <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN SLIDE WORKSPACE ================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-6 py-6 flex flex-col justify-center">
+    
+    <!-- Slide Card Frame -->
+    <div class="w-full bg-white rounded-3xl border border-slate-200/90 shadow-sm p-8 min-h-[560px] flex flex-col justify-between relative overflow-hidden transition-all duration-200">
+      
+      <!-- Slide Top Metadata -->
+      <div>
+        <div class="flex items-center justify-between text-xs font-mono pb-3 mb-4 border-b border-slate-100">
+          <span id="slide-module-tag" class="text-indigo-600 font-bold uppercase tracking-wider"></span>
+          <span id="slide-counter-badge" class="text-slate-800 font-bold bg-slate-100 px-3 py-0.5 rounded-full"></span>
+        </div>
+
+        <!-- Slide Title & Subtitle -->
+        <div class="mb-4">
+          <h2 id="slide-title" class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug"></h2>
+          <p id="slide-subtitle" class="text-xs md:text-sm text-slate-500 mt-1.5 font-medium"></p>
+        </div>
+      </div>
+
+      <!-- Slide Main Dynamic Body -->
+      <div id="slide-content" class="flex-1 flex flex-col justify-center my-2 overflow-y-auto custom-scrollbar">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Slide Bottom Sub-Footer -->
+      <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between text-xs font-mono text-slate-400 mt-4">
+        <div>SurfaceGuard AI • First-Principles Vision Lab • BSDA2001P</div>
+        <div class="flex items-center gap-4">
+          <span>Navigate with: <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px]">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px]">→</kbd> or <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px]">Space</kbd></span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ================= BOTTOM PRESENTATION CONTROL BAR ================= -->
+  <footer class="bg-white border-t border-slate-200/90 py-3.5 px-6">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+      
+      <!-- Prev / Next Navigation -->
+      <div class="flex items-center gap-2">
+        <button onclick="prevSlide()" class="px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold flex items-center gap-1.5 shadow-sm transition">
+          <span>← Previous</span>
+        </button>
+        <button onclick="nextSlide()" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center gap-1.5 shadow-sm shadow-indigo-600/30 transition">
+          <span>Next →</span>
+        </button>
+      </div>
+
+      <!-- Quick Jump Selector -->
+      <div class="flex items-center gap-2">
+        <span class="text-slate-500 font-medium font-sans">Jump to:</span>
+        <select id="slide-dropdown" onchange="jumpToSlide(parseInt(this.value))" class="bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-3 py-1.5 text-xs font-mono outline-none focus:border-indigo-500">
+          <!-- Injected via script -->
+        </select>
+      </div>
+
+      <div class="text-slate-400 text-xs">
+        Press <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px]">M</kbd> for Notes • <kbd class="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px]">F</kbd> for Fullscreen
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= PRESENTER MENTOR NOTES DRAWER ================= -->
+  <div id="notes-drawer" class="fixed top-20 right-6 w-96 max-h-[80vh] bg-white rounded-3xl border border-slate-200 shadow-2xl z-50 p-5 hidden flex-col">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3 font-mono text-xs">
+      <div class="flex items-center gap-2 font-bold text-slate-800">
+        <span class="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
+        <span>Teaching Notes & Socratic Prompts</span>
+      </div>
+      <button onclick="toggleNotesDrawer()" class="text-slate-400 hover:text-slate-700 font-bold text-sm">✕</button>
+    </div>
+    <div id="notes-content" class="text-xs text-slate-600 leading-relaxed overflow-y-auto space-y-3 pr-1 custom-scrollbar">
+      <!-- Dynamic notes content -->
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT CONTROLLERS ================= -->
+  <script>
+    const slides = [{"module": "Live Session 1 \u2022 Foundations", "title": "SurfaceGuard AI: Vision Foundations & Mask Mechanics", "subtitle": "First-Principles Surface Defect Segmentation in High-Speed Steel Manufacturing", "notes": "Welcome everyone. Today is our deep-dive into First-Principles Computer Vision for industrial surface inspection. We will not treat computer vision as a black-box model. We will dissect the physical data, the memory architecture, the metric pitfalls, and the post-processing mechanics that determine real-world inspection accuracy.", "content": "\n        <div class=\"flex flex-col items-center justify-center text-center py-12 space-y-6\">\n          <div class=\"inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-200 bg-indigo-50/70 text-indigo-700 text-xs font-semibold tracking-wide\">\n            Industrial Vision Engineering           </div>\n          <h1 class=\"text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight max-w-4xl leading-tight\">\n            SurfaceGuard AI: Vision Foundations & Mask Mechanics\n          </h1>\n          <p class=\"text-base text-slate-600 max-w-2xl leading-relaxed\">\n            First-principles analysis of industrial high-speed steel strip inspection, column-major spatial encodings, metric discontinuities, and morphological clustering.\n          </p>\n          <div class=\"flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-500 border-t border-slate-200 pt-6 mt-4\">\n            <div>Program: <span class=\"text-slate-900 font-semibold\">BSDA2001P</span></div>\n            <span>\u2022</span>\n            <div>Domain: <span class=\"text-slate-900 font-semibold\">Automated Surface Anomaly Detection</span></div>\n            <span>\u2022</span>\n            <div>Core Focus: <span class=\"text-slate-900 font-semibold\">Data Physics & Evaluation Mechanics</span></div>\n          </div>\n        </div>\n        "}, {"module": "Session Architecture", "title": "Session Roadmap: The 90-Minute Progression", "subtitle": "Connecting industrial manufacturing physics to rigorous deep learning pipelines", "notes": "Walk through the 6 core modules. Give students the complete engineering progression from raw sensor geometry down to post-processing and metric optimization.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-5 py-4\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between hover:border-indigo-300 transition shadow-sm\">\n            <div>\n              <span class=\"text-xs font-mono text-indigo-600 font-bold block mb-1\">MODULE 1 (18 MINS)</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Spatial Geometry & Memory</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Native line-scan aspect ratios, anisotropic distortion risks, sub-pixel Nyquist limits, and Fortran column-major memory addressing.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-slate-500 pt-3 border-t border-slate-200/80\">\n              Sensor Resolution & Linear RAM\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between hover:border-indigo-300 transition shadow-sm\">\n            <div>\n              <span class=\"text-xs font-mono text-indigo-600 font-bold block mb-1\">MODULE 2 (17 MINS)</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Cardinality & Output Heads</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Denominator sensitivity in frequency analysis, multi-label distributions, spatial mutual exclusivity, and loss head design.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-slate-500 pt-3 border-t border-slate-200/80\">\n              Statistical Sparsity & Loss Heads\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between hover:border-indigo-300 transition shadow-sm\">\n            <div>\n              <span class=\"text-xs font-mono text-indigo-600 font-bold block mb-1\">MODULE 3 (23 MINS)</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">The Measurement Crisis</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Why accuracy collapses under extreme class imbalance, the Dice step-function discontinuity, and composite metric formulations.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-slate-500 pt-3 border-t border-slate-200/80\">\n              Metric Trade-offs & Baseline Scoring\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between hover:border-indigo-300 transition shadow-sm\">\n            <div>\n              <span class=\"text-xs font-mono text-indigo-600 font-bold block mb-1\">MODULE 4 (14 MINS)</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Feature Regimes & Texture</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Photometric contrast vs pure texture, standardized effect size (Cohen's d), and multi-scale receptive field engineering.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-slate-500 pt-3 border-t border-slate-200/80\">\n              Cohen's d & Spatial Frequencies\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between hover:border-indigo-300 transition shadow-sm\">\n            <div>\n              <span class=\"text-xs font-mono text-indigo-600 font-bold block mb-1\">MODULE 5 (13 MINS)</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Validation & Post-Processing</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                4-connectivity vs 8-connectivity lattice mechanics, area thresholding trade-offs, combination stratification, and decision threshold sweeps.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-slate-500 pt-3 border-t border-slate-200/80\">\n              Graph Neighborhoods & Filtering\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/50 flex flex-col justify-between hover:border-indigo-300 transition shadow-sm\">\n            <div>\n              <span class=\"text-xs font-mono text-indigo-600 font-bold block mb-1\">MODULE 6 (5 MINS)</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Action Plan & Q&A</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Practical engineering pipeline checklist, baseline submission verification, experiment tracking setup, and open floor discussion.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-slate-500 pt-3 border-t border-slate-200/80\">\n              Pipeline Checklist & Discussion\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Industrial Context", "title": "Industrial Reality: High-Speed Automated Inspection", "subtitle": "Continuous hot and cold strip rolling mills operating under extreme physical constraints", "notes": "Set the engineering stage. In a rolling mill, steel strips travel at 10 to 20 meters per second. Line-scan sensors capture 128x800 pixel crops. False negatives cause catastrophic stamping press breakdowns; false positives scrap prime steel coils.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-3\">The Manufacturing Environment</h3>\n              <ul class=\"space-y-3.5 text-xs text-slate-700 leading-relaxed\">\n                <li class=\"flex items-start gap-2.5\">\n                  <span class=\"w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0\"></span>\n                  <span><strong>Line-Scan Imaging:</strong> Continuous metal coils moving at high conveyor speeds (10\u201320 m/s) are digitized via synchronized linear sensors into slender $128 \\times 800$ pixel segments.</span>\n                </li>\n                <li class=\"flex items-start gap-2.5\">\n                  <span class=\"w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0\"></span>\n                  <span><strong>Severe Asymmetric Costs:</strong> A missed crack (False Negative) leads to catastrophic coil fracturing during subsequent automotive stamping, destroying multi-million dollar dies. An uncalibrated alarm (False Positive) scraps good prime steel.</span>\n                </li>\n                <li class=\"flex items-start gap-2.5\">\n                  <span class=\"w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0\"></span>\n                  <span><strong>Defect Diversity:</strong> Surface anomalies range from micro-pits ($<10$ pixels) to longitudinal rolling scratches ($>400$ pixels) and massive chemical scale oxide blotches.</span>\n                </li>\n              </ul>\n            </div>\n            <div class=\"p-3.5 rounded-xl bg-indigo-50/60 border border-indigo-100 text-indigo-950 text-xs\">\n              \ud83d\udca1 <strong>Core Engineering Objective:</strong> Build a segmentation model that maximizes defect detection while strictly avoiding false alarms on clean steel.\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 font-mono text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] mb-3\">Physical Specifications</div>\n              <div class=\"space-y-2.5 text-slate-800\">\n                <div class=\"flex justify-between border-b border-slate-200/80 pb-2\">\n                  <span>Image Dimensions:</span>\n                  <span class=\"font-bold text-slate-900\">128 (Height) \u00d7 800 (Width) px</span>\n                </div>\n                <div class=\"flex justify-between border-b border-slate-200/80 pb-2\">\n                  <span>Aspect Ratio ($W:H$):</span>\n                  <span class=\"font-bold text-slate-900\">Extreme Ribbon Geometry ($W \\gg H$)</span>\n                </div>\n                <div class=\"flex justify-between border-b border-slate-200/80 pb-2\">\n                  <span>Canvas Area:</span>\n                  <span class=\"font-bold text-slate-900\">102,400 pixels per strip</span>\n                </div>\n                <div class=\"flex justify-between\">\n                  <span>Sensor Type:</span>\n                  <span class=\"font-bold text-slate-900\">Industrial Optical Line-Scan Array</span>\n                </div>\n              </div>\n            </div>\n\n            <div class=\"p-3.5 bg-white rounded-xl border border-slate-200 text-slate-700 text-[11px] leading-relaxed\">\n              <strong>Why Generic Vision Pipelines Fail:</strong> Off-the-shelf vision scripts assume square, balanced natural photos. Industrial steel strips have extreme geometric anisotropy and severe background dominance.\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 1: Spatial Geometry & Memory", "title": "Section 1: Spatial Geometry, Sampling & Column-Major Memory", "subtitle": "Physical Data Properties, Spatial Nyquist Limits & Linear RAM Addressing (18 Minutes)", "notes": "Introduce Section 1. Discuss how images are physically sampled on the conveyor, why aspect ratio distortion alters defect orientation, and how 2D tensors map into 1D memory buffers.", "content": "\n        <div class=\"p-8 rounded-2xl border border-slate-200 bg-white space-y-6 shadow-sm my-4\">\n          <div class=\"max-w-3xl space-y-3\">\n            <span class=\"text-xs font-mono font-bold text-indigo-600 uppercase tracking-widest block\">Module 1 of 6</span>\n            <h2 class=\"text-2xl md:text-3xl font-extrabold text-slate-900\">\n              Spatial Geometry, Sampling & Column-Major Memory\n            </h2>\n            <p class=\"text-sm text-slate-600 leading-relaxed\">\n              Before training neural networks, machine learning practitioners must understand how image sensors discretize reality, why naive aspect-ratio warping causes catastrophic information loss, and how run-length encodings traverse physical memory.\n            </p>\n          </div>\n\n          <div class=\"grid grid-cols-1 md:grid-cols-2 gap-5 text-xs font-mono\">\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Spatial Geometry:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 Native Anisotropic Aspect Ratios ($H \\ll W$)</div>\n                <div>\u2022 Non-uniform Scaling ($s_x \\neq s_y$) and Orientation Warping</div>\n                <div>\u2022 Spatial Nyquist Limits & Sub-pixel Defect Erasure</div>\n              </div>\n            </div>\n\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Memory & Storage:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 Row-Major (C) vs Column-Major (Fortran `order='F'`)</div>\n                <div>\u2022 1-Based Run-Length Encoding (RLE) Mechanics</div>\n                <div>\u2022 Defensive Boundary Clamping for Linear Buffers</div>\n              </div>\n            </div>\n          </div>\n        </div>\n        "}, {"module": "Section 1: Spatial Geometry & Memory", "title": "The Anisotropic Aspect Ratio Dilemma", "subtitle": "Understanding geometric scaling and distortion when mapping to standard backbones", "notes": "Explain how scaling factors sx and sy behave when mapping an image of dimensions (H_orig, W_orig) to a target size (H_target, W_target). Show that when the target is square, vertical stretching relative to horizontal compression equals W_orig / H_orig.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Geometric Scaling Formulation</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-3\">\n                Standard deep learning backbones often accept square inputs. When an input of native dimensions $(H_{\\text{native}}, W_{\\text{native}})$ is resized to $(H_{\\text{target}}, W_{\\text{target}})$, horizontal and vertical scale factors operate independently:\n              </p>\n              <div class=\"p-4 rounded-xl border border-slate-200 bg-slate-50 font-mono text-xs space-y-2.5\">\n                <div class=\"flex justify-between\">\n                  <span>Horizontal Scale ($s_x$):</span>\n                  <span class=\"font-bold text-slate-900\">$$s_x = \\frac{W_{\\text{target}}}{W_{\\text{native}}}$$</span>\n                </div>\n                <div class=\"flex justify-between\">\n                  <span>Vertical Scale ($s_y$):</span>\n                  <span class=\"font-bold text-slate-900\">$$s_y = \\frac{H_{\\text{target}}}{H_{\\text{native}}}$$</span>\n                </div>\n                <div class=\"border-t border-slate-200 pt-2 flex justify-between text-indigo-700 font-bold\">\n                  <span>Distortion Ratio ($\\frac{s_y}{s_x}$):</span>\n                  <span>$$\\frac{s_y}{s_x} = \\frac{H_{\\text{target}}}{W_{\\text{target}}} \\cdot \\frac{W_{\\text{native}}}{H_{\\text{native}}}$$</span>\n                </div>\n              </div>\n            </div>\n\n            <div class=\"p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700\">\n              When $H_{\\text{target}} = W_{\\text{target}}$ (square input), the distortion ratio simplifies directly to the inverse native aspect ratio $\\frac{W_{\\text{native}}}{H_{\\text{native}}}$. This alters angle orientations:\n              <div class=\"text-center font-mono text-slate-900 font-bold py-1\">\n                $$\\theta_{\\text{warped}} = \\arctan\\left(\\frac{s_y}{s_x} \\cdot \\tan \\theta_{\\text{true}}\\right)$$\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 shadow-sm flex flex-col justify-between\">\n            <div class=\"text-xs font-bold text-slate-900 uppercase tracking-wide\">Conceptual Effect of Anisotropic Warping</div>\n            \n            <div class=\"space-y-1.5\">\n              <div class=\"flex justify-between text-[11px] font-mono text-slate-500\">\n                <span>Native Conveyor Canvas ($H \\ll W$):</span>\n                <span>Anisotropic Ribbon</span>\n              </div>\n              <div class=\"w-full h-16 bg-slate-900 rounded-xl relative overflow-hidden flex items-center justify-center border border-slate-800\">\n                <div class=\"w-4/5 h-0.5 bg-rose-500 shadow-[0_0_8px_#f43f5e]\"></div>\n                <span class=\"absolute text-[10px] font-mono text-slate-300 bg-slate-900/90 px-2 py-0.5 rounded border border-slate-700\">\n                  Thin horizontal scratch across width\n                </span>\n              </div>\n            </div>\n\n            <div class=\"space-y-1.5\">\n              <div class=\"flex justify-between text-[11px] font-mono text-slate-500\">\n                <span>Square Resize ($H = W$):</span>\n                <span class=\"text-rose-600 font-bold\">Non-Uniformly Warped</span>\n              </div>\n              <div class=\"w-36 h-36 mx-auto bg-slate-900 rounded-xl relative flex flex-col items-center justify-center border border-slate-800 p-2 text-center\">\n                <div class=\"w-24 h-1 bg-rose-500/90 shadow-[0_0_8px_#f43f5e]\"></div>\n                <span class=\"text-[9px] font-mono text-slate-400 mt-2\">\n                  Compressed horizontally<br>Expanded vertically\n                </span>\n              </div>\n            </div>\n\n            <p class=\"text-[11px] text-slate-500 pt-2 border-t border-slate-200\">\n              <strong>Engineering Takeaway:</strong> Isotropic convolutional filters will perceive distorted defect shapes unless rectangular input windows, patch cropping, or aspect-preserving resizes are applied.\n            </p>\n          </div>\n\n        </div>\n        "}, {"module": "Section 1: Spatial Geometry & Memory", "title": "Nyquist Spatial Sampling & Sub-Pixel Erasure", "subtitle": "Why standard interpolation algorithms can completely destroy genuine surface cracks", "notes": "Explain how downsampling thin features below the Nyquist rate causes spatial erasure. Nearest-neighbor rounding skips sub-pixel structures, while area averaging preserves energy.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">The Sub-Pixel Disappearance Mechanism</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-3\">\n                Industrial rolling defects often manifest as hairline longitudinal cracks with physical widths of only 1 to 2 pixels on the sensor array.\n              </p>\n              <ul class=\"space-y-3 text-xs text-slate-700 leading-relaxed\">\n                <li class=\"flex items-start gap-2\">\n                  <span class=\"font-mono text-indigo-600 font-bold\">1.</span>\n                  <span><strong>Compression Below One Pixel:</strong> If horizontal scaling $s_x < 0.5$, a 1-pixel or 2-pixel feature is compressed to fractional pixel dimensions ($w_{\\text{warped}} = w_{\\text{true}} \\cdot s_x < 1$).</span>\n                </li>\n                <li class=\"flex items-start gap-2\">\n                  <span class=\"font-mono text-indigo-600 font-bold\">2.</span>\n                  <span><strong>Nearest-Neighbor Failure (INTER_NEAREST):</strong> Sub-pixel locations round to the nearest integer index. If the sampling stride skips the fractional feature coordinate, the defect is entirely erased from the tensor.</span>\n                </li>\n                <li class=\"flex items-start gap-2\">\n                  <span class=\"font-mono text-indigo-600 font-bold\">3.</span>\n                  <span><strong>Area Averaging Solution (INTER_AREA):</strong> Integrates pixel area relations. Instead of skipping, it distributes fractional energy across neighboring bins as a low-intensity boundary.</span>\n                </li>\n              </ul>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 font-mono text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold text-[11px] mb-3 uppercase tracking-wider\">Downsampling Interpolation Trade-offs</div>\n              <div class=\"border border-slate-200 rounded-xl overflow-hidden bg-white\">\n                <table class=\"w-full text-left text-[11px]\">\n                  <thead class=\"bg-slate-100/70 border-b border-slate-200 text-slate-800\">\n                    <tr>\n                      <th class=\"p-2.5\">Interpolation</th>\n                      <th class=\"p-2.5\">Sub-Pixel Crack Fidelity</th>\n                      <th class=\"p-2.5\">Mathematical Property</th>\n                    </tr>\n                  </thead>\n                  <tbody class=\"divide-y divide-slate-100 text-slate-700\">\n                    <tr>\n                      <td class=\"p-2.5 font-bold text-slate-900\">INTER_NEAREST</td>\n                      <td class=\"p-2.5 text-rose-600 font-semibold\">High risk of complete erasure</td>\n                      <td class=\"p-2.5\">Point sampling without antialiasing</td>\n                    </tr>\n                    <tr>\n                      <td class=\"p-2.5 font-bold text-slate-900\">INTER_LINEAR</td>\n                      <td class=\"p-2.5 text-slate-600\">Blurs edge gradients</td>\n                      <td class=\"p-2.5\">Bilinear weight blending</td>\n                    </tr>\n                    <tr>\n                      <td class=\"p-2.5 font-bold text-slate-900\">INTER_AREA</td>\n                      <td class=\"p-2.5 text-emerald-700 font-bold\">Preserves feature energy</td>\n                      <td class=\"p-2.5\">Pixel area integration</td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n            </div>\n\n            <div class=\"p-3.5 bg-white rounded-xl border border-slate-200 text-slate-700 text-[11px] leading-relaxed\">\n              <strong>Pipeline Design Choice:</strong> When working with slender high-resolution strips, options include:\n              (a) patch-based cropping at native resolution,\n              (b) aspect-preserving downsampling with <code>INTER_AREA</code>, or\n              (c) full-resolution rectangular backbones.\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 1: Spatial Geometry & Memory", "title": "Column-Major (Fortran) vs Row-Major (C) Memory Traversal", "subtitle": "How multidimensional image matrices map to physical one-dimensional RAM addresses", "notes": "Explain why C-order vs Fortran-order exists. C-order scans row-by-row (left to right). Fortran-order scans column-by-column (top to bottom). Emphasize that RLE standards require matching memory traversal order.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">The Memory Addressing Paradigm</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Digital RAM is a strictly one-dimensional linear tape. When storing a 2D tensor of shape $(H, W)$, two fundamental indexing conventions exist:\n              </p>\n              <div class=\"space-y-3 text-xs\">\n                <div class=\"p-4 rounded-xl border border-slate-200 bg-slate-50\">\n                  <strong class=\"text-slate-900 block mb-1\">Row-Major Order (C Style, order='C'):</strong>\n                  <p class=\"text-slate-600 text-[11px] mb-1.5\">Traverse row-by-row from left-to-right. Consecutive memory addresses correspond to adjacent columns in the same row.</p>\n                  <div class=\"font-mono text-[11px] text-slate-800\">$$\\text{Address}(r, c) = r \\cdot W + c$$</div>\n                </div>\n\n                <div class=\"p-4 rounded-xl border border-indigo-200 bg-indigo-50/50\">\n                  <strong class=\"text-indigo-950 block mb-1\">Column-Major Order (Fortran Style, order='F'):</strong>\n                  <p class=\"text-indigo-900 text-[11px] mb-1.5\">Traverse column-by-column from top-to-bottom. Consecutive memory addresses correspond to adjacent rows in the same column.</p>\n                  <div class=\"font-mono text-indigo-950 font-bold\">$$\\text{Address}(r, c) = c \\cdot H + r$$</div>\n                </div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 font-mono text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] mb-3\">Memory Layout Conventions</div>\n              \n              <div class=\"p-3.5 bg-white rounded-xl border border-slate-200 text-slate-800 space-y-1 mb-3\">\n                <div class=\"text-[11px] text-slate-500\">1-Based Column-Major Convention:</div>\n                <div class=\"text-xs font-bold text-slate-900\">Index 1 is $(0, 0)$. Index 2 is $(1, 0)$ [directly beneath it]</div>\n                <div class=\"text-[11px] text-slate-600\">Traversing moves down column 0, then wraps to the top of column 1.</div>\n              </div>\n\n              <div class=\"p-3.5 bg-rose-50 rounded-xl border border-rose-200 text-rose-950 text-[11px] leading-relaxed\">\n                <strong>The Transposition Bug:</strong> If a mask is flattened using default row-major C-ordering instead of column-major order, vertical scratches are sliced across multiple columns, appearing as disconnected horizontal streaks.\n              </div>\n            </div>\n\n            <div class=\"p-3.5 bg-white rounded-xl border border-slate-200 text-slate-800 text-[11px]\">\n              <strong>Array Unrolling in Python:</strong><br>\n              <code>flat_mask = mask.T.flatten()  # or mask.flatten(order='F')</code>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 1: Spatial Geometry & Memory", "title": "Interactive RLE Laboratory: 2D Mask \u2194 RLE Encoding", "subtitle": "Click pixels to draw defects, test presets, and see live Column-Major vs Row-Major unrolling", "notes": "Use this live interactive workbench! Click presets like 'Vertical Crack' and switch between Column-Major ('F') and Row-Major ('C'). Show students how a vertical crack is ONE clean run under Fortran order, but shatters into 8 disjoint pairs under C order!", "content": "\n        <div class=\"grid grid-cols-1 lg:grid-cols-12 gap-6 py-2 items-stretch font-sans\">\n          \n          <!-- Left 5 Cols: Interactive 8x8 Grid -->\n          <div class=\"lg:col-span-5 p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex items-center justify-between mb-2\">\n                <h4 class=\"text-xs font-bold text-slate-900 uppercase tracking-wider font-mono\">2D Pixel Grid (8 \u00d7 8)</h4>\n                <span class=\"text-[10px] font-mono text-slate-500\">Click cells to draw</span>\n              </div>\n\n              <!-- 8x8 Grid Container -->\n              <div id=\"rle-grid\" class=\"grid grid-cols-8 gap-1 p-2 bg-slate-900 rounded-xl border border-slate-800 mx-auto max-w-[280px]\">\n                <!-- 64 cells generated by JS -->\n              </div>\n            </div>\n\n            <!-- Shape Presets -->\n            <div class=\"space-y-1.5 pt-2 border-t border-slate-100\">\n              <span class=\"text-[10px] font-mono text-slate-500 block uppercase font-bold\">Defect Morphology Presets:</span>\n              <div class=\"grid grid-cols-2 gap-1.5 text-[11px] font-mono\">\n                <button onclick=\"setRlePreset('vertical')\" class=\"px-2 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 rounded border border-slate-200 text-slate-700 text-left transition\">\n                  \u25ae Vertical Crack\n                </button>\n                <button onclick=\"setRlePreset('horizontal')\" class=\"px-2 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 rounded border border-slate-200 text-slate-700 text-left transition\">\n                  \u25ac Horizontal Scratch\n                </button>\n                <button onclick=\"setRlePreset('diagonal')\" class=\"px-2 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 rounded border border-slate-200 text-slate-700 text-left transition\">\n                  \u25b0 Diagonal Streak\n                </button>\n                <button onclick=\"setRlePreset('pits')\" class=\"px-2 py-1 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 rounded border border-slate-200 text-slate-700 text-left transition\">\n                  \u25aa Pitted Inclusions\n                </button>\n              </div>\n              <button onclick=\"setRlePreset('clear')\" class=\"w-full py-1 text-[10px] font-mono text-slate-500 hover:text-rose-600 text-center transition\">\n                Clear Grid\n              </button>\n            </div>\n          </div>\n\n          <!-- Right 7 Cols: Live Encoding & Memory Tape -->\n          <div class=\"lg:col-span-7 p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-4 shadow-sm flex flex-col justify-between font-mono text-xs\">\n            <div>\n              <!-- Order Toggle -->\n              <div class=\"flex items-center justify-between pb-3 border-b border-slate-200\">\n                <span class=\"text-slate-700 font-bold text-xs font-sans\">Memory Traversal Mode:</span>\n                <div class=\"flex bg-slate-200 p-0.5 rounded-lg text-[11px]\">\n                  <button id=\"btn-order-f\" onclick=\"setRleOrder('F')\" class=\"px-3 py-1 rounded-md font-bold bg-indigo-600 text-white shadow-sm transition\">\n                    Column-Major (order='F')\n                  </button>\n                  <button id=\"btn-order-c\" onclick=\"setRleOrder('C')\" class=\"px-3 py-1 rounded-md font-bold text-slate-700 hover:text-slate-900 transition\">\n                    Row-Major (order='C')\n                  </button>\n                </div>\n              </div>\n\n              <!-- Live RLE Output Box -->\n              <div class=\"mt-3 p-3.5 bg-slate-900 text-slate-100 rounded-xl space-y-2 border border-slate-800\">\n                <div class=\"flex justify-between items-center text-[11px] text-slate-400\">\n                  <span>Generated RLE String (1-Indexed):</span>\n                  <span id=\"rle-stats\" class=\"text-indigo-400 font-bold\">8 active pixels \u2022 1 run</span>\n                </div>\n                <div id=\"rle-output-string\" class=\"p-2 bg-slate-950 rounded-lg text-emerald-400 font-bold text-xs break-all max-h-16 overflow-y-auto custom-scrollbar\">\n                  17 8\n                </div>\n              </div>\n\n              <!-- 1D Linear Tape Visualizer -->\n              <div class=\"mt-3 space-y-1.5\">\n                <div class=\"flex justify-between text-[11px] text-slate-500\">\n                  <span>1D RAM Buffer View (Addresses 1 to 64):</span>\n                  <span id=\"rle-order-label\" class=\"text-indigo-600 font-bold\">Top-to-Bottom, Col-by-Col</span>\n                </div>\n                <div id=\"rle-memory-tape\" class=\"flex flex-wrap gap-1 p-2 bg-white rounded-xl border border-slate-200 max-h-24 overflow-y-auto custom-scrollbar\">\n                  <!-- 64 address chips generated by JS -->\n                </div>\n              </div>\n            </div>\n\n            <!-- Clamping Alert -->\n            <div class=\"p-3 bg-amber-50 rounded-xl border border-amber-200 text-amber-950 text-[11px] font-sans leading-relaxed\">\n              <strong>Defensive Boundary Clamping:</strong> In finite image buffers of size $N = H \\times W$, an RLE run index $(start + length - 1)$ must satisfy $1 \\le \\text{index} \\le N$. A robust decoder clamps: <code>end_pos = min(start + length, N)</code>.\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 2: Cardinality & Heads", "title": "Section 2: Label Cardinality, Denominators & Output Heads", "subtitle": "Statistical Imbalance, Spatial Mutual Exclusivity & Loss Formulations (17 Minutes)", "notes": "Transition to Section 2. Explain how calculating defect statistics requires careful choice of denominator, and explore how multi-label co-occurrence relates to pixel-level exclusivity.", "content": "\n        <div class=\"p-8 rounded-2xl border border-slate-200 bg-white space-y-6 shadow-sm my-4\">\n          <div class=\"max-w-3xl space-y-3\">\n            <span class=\"text-xs font-mono font-bold text-indigo-600 uppercase tracking-widest block\">Module 2 of 6</span>\n            <h2 class=\"text-2xl md:text-3xl font-extrabold text-slate-900\">\n              Label Cardinality, Denominators & Output Heads\n            </h2>\n            <p class=\"text-sm text-slate-600 leading-relaxed\">\n              Investigating the statistical distribution of defect labels, understanding denominator sensitivity in exploratory analysis, and deriving the optimal loss function and output head architecture from spatial physics.\n            </p>\n          </div>\n\n          <div class=\"grid grid-cols-1 md:grid-cols-2 gap-5 text-xs font-mono\">\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Statistical Analysis:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 The \"Three Denominators\" in Dataset Sparsity Analysis</div>\n                <div>\u2022 Image-Level Defect Cardinality ($|\\mathcal{Y}_i|$)</div>\n                <div>\u2022 Single-label vs Multi-label Co-occurrence</div>\n              </div>\n            </div>\n\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Architecture & Loss:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 Spatial Overlap Analysis across Channels</div>\n                <div>\u2022 5-Class Softmax vs 4 Independent Sigmoids</div>\n                <div>\u2022 BCEWithLogitsLoss with Per-Channel Tuning</div>\n              </div>\n            </div>\n          </div>\n        </div>\n        "}, {"module": "Section 2: Cardinality & Heads", "title": "The 'Three Denominators' in Dataset Sparsity Analysis", "subtitle": "Why dividing by different totals produces vastly different perceived defect frequencies", "notes": "Discuss why calculating class prevalence requires specifying the denominator: total table rows, unique physical strips, or only defective strips. Each answers a different operational question.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <span class=\"text-xs font-mono font-bold text-slate-400 block mb-1\">DENOMINATOR A</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Total Table Rows</h3>\n              <div class=\"font-mono text-sm font-bold text-slate-800 mb-2\">$$N_{\\text{rows}} = N_{\\text{images}} \\times C$$</div>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                When each image has $C$ separate rows in a table (one per class), dividing positive counts by total rows measures raw database record sparsity.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-200\">\n              Measures: Row-level table occupancy\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-indigo-200 bg-indigo-50/40 space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <span class=\"text-xs font-mono font-bold text-indigo-600 block mb-1\">DENOMINATOR B</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Unique Inspection Units</h3>\n              <div class=\"font-mono text-sm font-bold text-indigo-950 mb-2\">$$N_{\\text{images}}$$</div>\n              <p class=\"text-xs text-indigo-900 leading-relaxed mb-4\">\n                Dividing positive defect counts by the number of unique physical steel strips measures the true physical prevalence of each defect across manufactured coils.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-indigo-950 font-bold bg-white p-2.5 rounded-xl border border-indigo-200\">\n              Measures: Physical manufacturing prevalence\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <span class=\"text-xs font-mono font-bold text-slate-400 block mb-1\">DENOMINATOR C</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Defective Images Only</h3>\n              <div class=\"font-mono text-sm font-bold text-slate-800 mb-2\">$$N_{\\text{defective}} \\quad (|Y| > 0)$$</div>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Conditioning strictly on images that contain at least one defect measures the conditional distribution of defect types when an anomaly occurs.\n              </p>\n            </div>\n            <div class=\"text-[11px] font-mono text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-200\">\n              Measures: Conditional defect composition\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 2: Cardinality & Heads", "title": "Image-Level Defect Cardinality Formulation", "subtitle": "Distinguishing between single-label classification and multi-label co-occurrence", "notes": "Explain label cardinality as the sum of active classes per image. Discuss why industrial inspection problems cannot be framed as standard single-class classification when defects can co-occur.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Mathematical Definition</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                For an image $i$ with binary indicator vector $\\mathbf{y}_i = [y_{i,1}, y_{i,2}, \\dots, y_{i,C}] \\in \\{0, 1\\}^C$, the label cardinality $|\\mathcal{Y}_i|$ is defined as:\n              </p>\n              <div class=\"p-4 bg-slate-50 rounded-xl border border-slate-200 text-center font-mono text-sm text-slate-900 font-bold mb-4\">\n                $$|\\mathcal{Y}_i| = \\sum_{c=1}^C y_{i,c}$$\n              </div>\n              <ul class=\"space-y-2 text-xs text-slate-700 font-mono\">\n                <li>\u2022 $|\\mathcal{Y}_i| = 0$: Clean steel strip (no active defects)</li>\n                <li>\u2022 $|\\mathcal{Y}_i| = 1$: Single-defect strip</li>\n                <li>\u2022 $|\\mathcal{Y}_i| \\ge 2$: Multi-defect co-occurrence</li>\n              </ul>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] font-mono mb-3\">Implications for Model Architecture</div>\n              <ul class=\"space-y-3.5 text-slate-700 leading-relaxed\">\n                <li class=\"flex items-start gap-2.5\">\n                  <span class=\"w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0\"></span>\n                  <span><strong>Clean Mass Dominance:</strong> In manufacturing, a significant proportion of sampled strips have $|\\mathcal{Y}_i| = 0$. An inspection model must reliably predict empty masks without false alarms.</span>\n                </li>\n                <li class=\"flex items-start gap-2.5\">\n                  <span class=\"w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0\"></span>\n                  <span><strong>Multi-Class Co-occurrence:</strong> Different physical error sources (e.g., rolling mechanical friction and chemical surface oxidation) can manifest on the same strip. A single-label multi-class head would force an artificial choice between them.</span>\n                </li>\n              </ul>\n            </div>\n            <div class=\"p-3 bg-white rounded-xl border border-slate-200 text-slate-600 text-[11px] font-mono\">\n              Formulation: Multi-label classification at the image level\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 2: Cardinality & Heads", "title": "The Spatial Mutual Exclusivity Analysis", "subtitle": "Formulating the hypothesis of pixel-level label competition", "notes": "Discuss whether co-occurring defects physically occupy the exact same pixel coordinates. Frame this as a hypothesis: how does an engineer test mask intersection across channels?", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">The Spatial Exclusivity Hypothesis</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Even when multiple defect classes co-occur on the same image, do they physically collide on the exact same pixel coordinates $(y, x)$?\n              </p>\n              <div class=\"p-4 rounded-xl border border-slate-200 bg-slate-900 text-slate-100 font-mono text-xs space-y-2\">\n                <span class=\"text-slate-400\"># Pixel-level intersection audit formulation</span><br>\n                $$\\Omega = \\sum_{i} \\sum_{c_1 < c_2} |M_{i, c_1} \\cap M_{i, c_2}|$$<br>\n                <span class=\"text-slate-400\">Where $M_{i, c}$ is the binary mask for class $c$</span>\n              </div>\n            </div>\n            <p class=\"text-xs text-slate-600 leading-relaxed\">\n              If $\\Omega > 0$, individual pixels belong to multiple classes simultaneously. If $\\Omega = 0$, classes are spatially disjoint at the pixel level.\n            </p>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] font-mono mb-3\">Physical & Modeling Interpretations</div>\n              <p class=\"text-slate-700 leading-relaxed mb-3\">\n                <strong>Physical Intuition:</strong> Can a localized micro-region on a metal sheet simultaneously be a physical pit and a chemical oxide stain? Testing this hypothesis guides loss function selection.\n              </p>\n              <div class=\"p-3.5 bg-white rounded-xl border border-slate-200 text-slate-800 space-y-1 mb-2 font-mono text-[11px]\">\n                <div class=\"font-bold\">Case A ($\\Omega = 0$): Spatial Disjointness</div>\n                <div class=\"text-slate-600\">Classes never touch the same pixel. Mutual exclusivity holds locally.</div>\n              </div>\n              <div class=\"p-3.5 bg-white rounded-xl border border-slate-200 text-slate-800 space-y-1 font-mono text-[11px]\">\n                <div class=\"font-bold\">Case B ($\\Omega > 0$): Pixel Overlap</div>\n                <div class=\"text-slate-600\">Pixels require independent binary probability channels.</div>\n              </div>\n            </div>\n            <div class=\"p-3 bg-indigo-50/70 border border-indigo-200 rounded-xl text-indigo-950 text-xs font-mono\">\n              Engineering task: Verify $\\Omega$ on your training dataset.\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 2: Cardinality & Heads", "title": "Output Head Choice: Softmax vs Independent Sigmoids", "subtitle": "Choosing the neural network loss function based on extreme background imbalance", "notes": "Compare 5-class Softmax against 4 independent Sigmoids. Explain that even if overlap is 0, background dominance (>99%) suppresses rare defect gradients under Softmax normalization.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex justify-between items-center mb-2\">\n                <h3 class=\"text-base font-bold text-slate-900\">Option 1: (C + 1)-Class Softmax Head</h3>\n                <span class=\"text-[10px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded\">$B \\times (C+1) \\times H \\times W$</span>\n              </div>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Channels include <code>[Background, Defect A, Defect B, Defect C, Defect D]</code> normalized via Softmax.\n              </p>\n              <div class=\"space-y-3 text-xs text-slate-700\">\n                <div class=\"p-3 rounded-xl bg-slate-50 border border-slate-200\">\n                  <strong>Normalization Constraint:</strong> Forces all classes to compete at each pixel: $\\sum_{c=0}^C p_c = 1$.\n                </div>\n                <div class=\"p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-950 text-[11px]\">\n                  <strong>Gradient Suppression Risk:</strong> Background constitutes $>99\\%$ of all pixels. Under Softmax, the dominant background logit suppresses gradient signals for rare or subtle defect classes during backpropagation.\n                </div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-indigo-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex justify-between items-center mb-2\">\n                <h3 class=\"text-base font-bold text-slate-900\">Option 2: C Independent Sigmoids</h3>\n                <span class=\"text-[10px] font-mono text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded font-bold border border-indigo-200\">$B \\times C \\times H \\times W$</span>\n              </div>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Channels represent defect classes independently via <code>BCEWithLogitsLoss</code>.\n              </p>\n              <div class=\"space-y-3 text-xs text-slate-700\">\n                <div class=\"p-3 rounded-xl bg-slate-50 border border-slate-200\">\n                  <strong>Independent Gradients:</strong> Eliminates inter-class competition. Gradient updates for one defect channel do not suppress another.\n                </div>\n                <div class=\"p-3 rounded-xl bg-indigo-50/70 border border-indigo-200 text-indigo-950 text-[11px]\">\n                  <strong>Independent Thresholding ($\\tau_c$):</strong> Allows decision thresholds to be tuned per class post-inference based on class sparsity and false positive penalties.\n                </div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 3: Metric Crisis", "title": "Section 3: The Measurement Crisis \u2014 Accuracy, Dice & Composite Metrics", "subtitle": "Extreme Imbalance Blindspots, Discontinuous Step Functions & Evaluation Trade-offs (23 Minutes)", "notes": "Transition to Section 3. Explain how pixel accuracy fails completely when anomalies occupy less than 1% of pixels, and analyze the mathematical discontinuity of Dice on negative plates.", "content": "\n        <div class=\"p-8 rounded-2xl border border-slate-200 bg-white space-y-6 shadow-sm my-4\">\n          <div class=\"max-w-3xl space-y-3\">\n            <span class=\"text-xs font-mono font-bold text-indigo-600 uppercase tracking-widest block\">Module 3 of 6</span>\n            <h2 class=\"text-2xl md:text-3xl font-extrabold text-slate-900\">\n              The Measurement Crisis: Accuracy, Dice & Composite Metrics\n            </h2>\n            <p class=\"text-sm text-slate-600 leading-relaxed\">\n              Investigating why classical classification accuracy breaks down under extreme class imbalance, analyzing the mathematical discontinuity of the S\u00f8rensen-Dice coefficient on clean images, and deconstructing composite industrial metrics.\n            </p>\n          </div>\n\n          <div class=\"grid grid-cols-1 md:grid-cols-2 gap-5 text-xs font-mono\">\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Metric Failures:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 The Pixel Accuracy Blindspot ($>99\\%$ Background)</div>\n                <div>\u2022 S\u00f8rensen-Dice Discontinuity on Empty Ground Truth</div>\n                <div>\u2022 Invariance to True Negative Volume</div>\n              </div>\n            </div>\n\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Composite Metric Design:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 Decoupling Foreground Precision from False Alarms</div>\n                <div>\u2022 Evaluating Empty vs Non-Empty Pairs</div>\n                <div>\u2022 Baseline Score Calculations</div>\n              </div>\n            </div>\n          </div>\n        </div>\n        "}, {"module": "Section 3: Metric Crisis", "title": "The 99% Pixel Accuracy Blindspot", "subtitle": "Why high accuracy scores can conceal complete model failure in industrial inspection", "notes": "Demonstrate the mathematical reason why predicting all zeros gives near-perfect pixel accuracy when defects occupy <1% of pixels. Explain why anomaly detection requires metrics invariant to TN volume.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">The Imbalance Arithmetic</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Consider a dataset where defects occupy a tiny fraction of the canvas:\n              </p>\n              <div class=\"p-4 rounded-xl border border-slate-200 bg-slate-50 font-mono text-xs space-y-2.5\">\n                <div>Defect Pixel Volume: $< 1\\%$ of total canvas</div>\n                <div>Background Pixel Volume: $> 99\\%$ of total canvas</div>\n                <div class=\"border-t border-slate-200 pt-2 text-indigo-700 font-bold\">\n                  Suppose a dummy model predicts $\\hat{X}_{i,j} = 0$ everywhere:\n                </div>\n              </div>\n            </div>\n\n            <div>\n              <div class=\"p-3 bg-slate-50 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-900 font-bold\">\n                $$\\text{Accuracy} = \\frac{\\text{TN} + \\text{TP}}{\\text{Total}} = \\frac{>99\\% + 0}{100\\%} > 99\\%$$\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] font-mono mb-3\">The Production Consequence</div>\n              <div class=\"p-4 bg-rose-50 rounded-xl border border-rose-200 text-rose-950 space-y-1.5 mb-4\">\n                <div class=\"font-bold text-sm\">Industrial Failure Mode:</div>\n                <p class=\"text-[11px] leading-relaxed\">\n                  A model with $>99\\%$ pixel accuracy that detects zero defects ships 100% of defective coils to customers. In manufacturing, raw accuracy is uninformative.\n                </p>\n              </div>\n              <p class=\"text-slate-700 leading-relaxed\">\n                <strong>Metric Requirement:</strong> An anomaly segmentation metric must exclude True Negatives ($\\text{TN}$) from its numerator and denominator, focusing evaluation strictly on defective regions.\n              </p>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 3: Metric Crisis", "title": "The S\u00f8rensen-Dice Discontinuity on Clean Ground Truth", "subtitle": "Analyzing the step-function behavior of Dice when Y is an empty set", "notes": "Walk through the math of standard Dice when Y is empty. Contrast X = empty (Dice = 1.0 by convention) with X having even a single stray pixel (Dice = 0.0). Explain why this discontinuity requires composite scoring.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">The Classical S\u00f8rensen-Dice Metric</h3>\n              <div class=\"p-3 bg-slate-50 rounded-xl border border-slate-200 font-mono text-center text-xs text-slate-900 mb-4\">\n                $$\\text{Dice}(X, Y) = \\frac{2 |X \\cap Y|}{|X| + |Y|}$$\n              </div>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-3\">\n                On positive samples ($|Y| > 0$), Dice increases smoothly as overlap grows.\n              </p>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-3\">\n                However, consider an image with <strong>clean ground truth ($Y = \\emptyset$)</strong>:\n              </p>\n              <div class=\"p-4 bg-slate-50 rounded-xl font-mono text-xs space-y-2 border border-slate-200\">\n                <div class=\"flex justify-between\">\n                  <span>If model predicts empty ($\\hat{X} = \\emptyset$):</span>\n                  <span class=\"font-bold text-emerald-700\">$\\text{Dice}(\\emptyset, \\emptyset) = 1.0$ (By convention)</span>\n                </div>\n                <div class=\"flex justify-between border-t border-slate-200 pt-2\">\n                  <span>If model predicts any noise ($|\\hat{X}| > 0$):</span>\n                  <span class=\"font-bold text-rose-600\">$\\text{Dice}(\\hat{X}, \\emptyset) = \\frac{2(0)}{|\\hat{X}| + 0} = 0.0$</span>\n                </div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] font-mono mb-3\">The Step-Function Property</div>\n              <div class=\"p-4 bg-rose-50 rounded-xl border border-rose-200 text-rose-950 text-[11px] leading-relaxed mb-4\">\n                <strong>Discontinuous Drop:</strong> On clean plates, the standard Dice metric behaves as an all-or-nothing step function: predicting 1 stray noise pixel yields the exact same score ($0.0$) as predicting thousands of false pixels.\n              </div>\n              <p class=\"text-slate-700 leading-relaxed mb-3\">\n                Standard Dice lacks graded penalization for small false alarms on negative plates. This motivates composite scoring formulations.\n              </p>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 3: Metric Crisis", "title": "Composite Metric Deconstruction in Industrial Evaluation", "subtitle": "Decoupling foreground overlap from false-alarm penalization on negative samples", "notes": "Explain how industrial competitions evaluate models using weighted composite components: foreground overlap on positive pairs, false-positive fraction on negative pairs, and binary empty accuracy.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-6 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex justify-between items-center mb-1\">\n                <span class=\"text-xs font-mono font-bold text-slate-400\">PART 1</span>\n                <span class=\"text-xs font-mono font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded\">Foreground Focus</span>\n              </div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Foreground Dice ($D_{\\text{FG}}$)</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Evaluated <strong>strictly on pairs where a ground-truth defect exists ($|Y| > 0$)</strong>:\n              </p>\n            </div>\n            <div class=\"p-3 bg-slate-50 rounded-xl font-mono text-[11px] text-slate-800 text-center border border-slate-200\">\n              $$D_{\\text{FG}} = \\frac{1}{N_{\\text{pos}}} \\sum_{|Y|>0} \\frac{2|\\hat{X} \\cap Y|}{|\\hat{X}| + |Y|}$$\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex justify-between items-center mb-1\">\n                <span class=\"text-xs font-mono font-bold text-slate-400\">PART 2</span>\n                <span class=\"text-xs font-mono font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded\">Graded FP Penalty</span>\n              </div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">False Positive Score ($S_{\\text{FP}}$)</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Evaluated <strong>strictly on clean plates ($|Y| = 0$)</strong> as a graded function of false-alarm area:\n              </p>\n            </div>\n            <div class=\"p-3 bg-slate-50 rounded-xl font-mono text-[11px] text-slate-800 text-center border border-slate-200\">\n              $$S_{\\text{FP}} = 1 - \\text{mean}\\left(\\frac{|\\hat{X}|}{\\text{CanvasArea}}\\right)_{|Y|=0}$$\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex justify-between items-center mb-1\">\n                <span class=\"text-xs font-mono font-bold text-slate-400\">PART 3</span>\n                <span class=\"text-xs font-mono font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded\">Clean Abstention</span>\n              </div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Empty Accuracy ($A_{\\text{empty}}$)</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                The proportion of clean pairs where the model correctly predicts a completely empty mask:\n              </p>\n            </div>\n            <div class=\"p-3 bg-slate-50 rounded-xl font-mono text-[11px] text-slate-800 text-center border border-slate-200\">\n              $$A_{\\text{empty}} = \\frac{1}{N_{\\text{empty}}} \\sum_{|Y|=0} \\mathbb{I}(|\\hat{X}| = 0)$$\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 3: Metric Crisis", "title": "Interactive Composite Metric Simulator", "subtitle": "Exploring trade-offs between foreground overlap and clean-plate false alarms", "notes": "Use the sliders to demonstrate how varying foreground Dice, false positive score, and empty accuracy changes the final weighted score. Show what happens when a model abstains completely.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Weighted Formulation</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                The composite score balances three competing objectives:\n              </p>\n              <div class=\"p-4 rounded-xl border border-slate-200 bg-slate-50 font-mono text-xs space-y-2\">\n                <div class=\"text-slate-900 font-bold text-center py-1\">\n                  $$\\text{Score} = w_1 \\cdot D_{\\text{FG}} + w_2 \\cdot S_{\\text{FP}} + w_3 \\cdot A_{\\text{empty}}$$\n                </div>\n                <div class=\"text-[11px] text-slate-600 pt-2 border-t border-slate-200 space-y-1\">\n                  <div>\u2022 $w_1 = 0.70$ (Foreground Dice on $|Y| > 0$)</div>\n                  <div>\u2022 $w_2 = 0.20$ (False Positive Score on $|Y| = 0$)</div>\n                  <div>\u2022 $w_3 = 0.10$ (Empty Accuracy on $|Y| = 0$)</div>\n                </div>\n              </div>\n            </div>\n\n            <div class=\"p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600\">\n              <strong>Observation:</strong> If a model outputs all-zeros, $D_{\\text{FG}} = 0$, but on clean plates $S_{\\text{FP}} = 1.0$ and $A_{\\text{empty}} = 1.0$.\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 font-mono text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex justify-between items-center border-b border-slate-200 pb-2 mb-4\">\n                <span class=\"font-bold text-slate-900 text-sm font-sans\">Live Metric Simulator</span>\n                <span id=\"calc-score\" class=\"text-2xl font-bold text-indigo-700\">0.8350</span>\n              </div>\n\n              <div class=\"space-y-4\">\n                <div>\n                  <div class=\"flex justify-between text-xs mb-1\">\n                    <span class=\"font-semibold text-slate-700 font-sans\">Foreground Dice (0.70):</span>\n                    <span id=\"calc-fg-val\" class=\"font-bold text-slate-900\">0.85</span>\n                  </div>\n                  <input type=\"range\" id=\"calc-fg-slider\" min=\"0\" max=\"1\" step=\"0.01\" value=\"0.85\" class=\"w-full\" oninput=\"updateMetricSimulator()\">\n                </div>\n\n                <div>\n                  <div class=\"flex justify-between text-xs mb-1\">\n                    <span class=\"font-semibold text-slate-700 font-sans\">False Positive Score (0.20):</span>\n                    <span id=\"calc-fp-val\" class=\"font-bold text-slate-900\">0.90</span>\n                  </div>\n                  <input type=\"range\" id=\"calc-fp-slider\" min=\"0\" max=\"1\" step=\"0.01\" value=\"0.90\" class=\"w-full\" oninput=\"updateMetricSimulator()\">\n                </div>\n\n                <div>\n                  <div class=\"flex justify-between text-xs mb-1\">\n                    <span class=\"font-semibold text-slate-700 font-sans\">Empty Accuracy (0.10):</span>\n                    <span id=\"calc-ea-val\" class=\"font-bold text-slate-900\">0.60</span>\n                  </div>\n                  <input type=\"range\" id=\"calc-ea-slider\" min=\"0\" max=\"1\" step=\"0.01\" value=\"0.60\" class=\"w-full\" oninput=\"updateMetricSimulator()\">\n                </div>\n              </div>\n            </div>\n\n            <div class=\"flex gap-3 pt-2 font-sans\">\n              <button onclick=\"setMetricPreset('empty')\" class=\"flex-1 py-2 rounded-xl border border-slate-300 bg-white text-xs hover:bg-slate-100 font-bold text-slate-700 transition\">\n                All-Empty Baseline\n              </button>\n              <button onclick=\"setMetricPreset('balanced')\" class=\"flex-1 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition shadow-sm\">\n                High Precision Preset\n              </button>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 4: Contrast vs Texture", "title": "Section 4: Feature Regimes \u2014 Photometric Contrast vs Pure Texture", "subtitle": "First-Order Statistics, Cohen's d Effect Size & Receptive Field Diversity (14 Minutes)", "notes": "Transition to Section 4. Contrast photometric intensity shifts with structural texture anomalies. Introduce Cohen's d as an effect size measure.", "content": "\n        <div class=\"p-8 rounded-2xl border border-slate-200 bg-white space-y-6 shadow-sm my-4\">\n          <div class=\"max-w-3xl space-y-3\">\n            <span class=\"text-xs font-mono font-bold text-indigo-600 uppercase tracking-widest block\">Module 4 of 6</span>\n            <h2 class=\"text-2xl md:text-3xl font-extrabold text-slate-900\">\n              Feature Regimes: Photometric Contrast vs Pure Texture\n            </h2>\n            <p class=\"text-sm text-slate-600 leading-relaxed\">\n              Analyzing why first-order intensity statistics fail to detect subtle steel imperfections, deriving Cohen's d standardized effect size, and exploring the multi-scale receptive field hierarchy required to detect both hairline scratches and large oxide patches.\n            </p>\n          </div>\n\n          <div class=\"grid grid-cols-1 md:grid-cols-2 gap-5 text-xs font-mono\">\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Photometric Regimes:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 Cohen's d Standardized Effect Size</div>\n                <div>\u2022 Photometric Invisibility ($|d| \\approx 0$)</div>\n                <div>\u2022 First-Order Intensity vs Second-Order Texture</div>\n              </div>\n            </div>\n\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Architecture Design Choices:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 Spatial frequency Gabor-like directional filters</div>\n                <div>\u2022 High-resolution spatial feature retention</div>\n                <div>\u2022 Multi-scale context aggregation (FPN, U-Net, DeepLab)</div>\n              </div>\n            </div>\n          </div>\n        </div>\n        "}, {"module": "Section 4: Contrast vs Texture", "title": "Cohen's d & The Photometric Invisibility Concept", "subtitle": "Measuring standardized brightness shifts between defect regions and background", "notes": "Define Cohen's d formula. Explain that when |d| is high, simple intensity differences distinguish the defect. When |d| is near zero, mean brightness is identical, so models must rely on spatial frequency and texture.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Standardized Mean Difference Formulation</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Cohen's $d$ quantifies the standardized distance between defect pixel intensities and surrounding background pixels:\n              </p>\n              <div class=\"p-3 bg-slate-50 rounded-xl border border-slate-200 font-mono text-center text-xs text-slate-900 mb-3\">\n                $$d = \\frac{\\mu_{\\text{defect}} - \\mu_{\\text{background}}}{\\sigma_{\\text{pooled}}}$$\n              </div>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-2\">\n                Where $\\sigma_{\\text{pooled}}$ is the pooled sample standard deviation:\n              </p>\n              <div class=\"p-3 bg-slate-50 rounded-xl border border-slate-200 font-mono text-[11px] text-center text-slate-800\">\n                $$\\sigma_{\\text{pooled}} = \\sqrt{\\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}$$\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 text-xs font-mono shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] mb-3\">Two Distinct Physical Regimes</div>\n              \n              <div class=\"p-3.5 bg-white rounded-xl border border-slate-200 space-y-1 mb-3\">\n                <div class=\"text-slate-900 font-bold\">Contrast-Dominant Regime ($|d| \\gg 0$):</div>\n                <p class=\"text-[11px] text-slate-600 font-sans\">Defects exhibit significant first-order intensity shifts (dark gouges or bright reflective burn marks). Brightness thresholding can separate them from background.</p>\n              </div>\n\n              <div class=\"p-3.5 bg-indigo-50/70 rounded-xl border border-indigo-200 text-indigo-950 space-y-1\">\n                <div class=\"text-indigo-900 font-bold\">Texture-Dominant Regime ($|d| \\approx 0$):</div>\n                <p class=\"text-[11px] text-indigo-900 font-sans\">Average pixel intensity is virtually identical to surrounding prime metal. First-order grayscale thresholds fail completely.</p>\n              </div>\n            </div>\n\n            <div class=\"p-3 bg-white rounded-xl border border-slate-200 text-slate-700 text-[11px] font-sans\">\n              <strong>Modeling Implication:</strong> For texture-dominant anomalies, convolutional neural networks must learn second-order spatial frequency representations (directional wavelets, edge co-occurrences).\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 4: Contrast vs Texture", "title": "Morphological Diversity & Multi-Scale Receptive Fields", "subtitle": "Architecture design choices for simultaneously capturing fine cracks and large patches", "notes": "Discuss the trade-offs of different segmentation architectures (U-Net, FPN, DeepLab). Explain how shallow features preserve fine scratches, while deeper layers aggregate context for large blotches.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-3\">Morphological Archetypes in Manufacturing</h3>\n              <div class=\"space-y-2.5 text-xs\">\n                <div class=\"p-3 rounded-xl border border-slate-200 bg-slate-50\">\n                  <strong class=\"text-slate-900 block mb-0.5\">Micro-Pits & Point Anomalies:</strong>\n                  <span class=\"text-slate-600 text-[11px]\">Small, localized, isotropic pixel clusters. Highly sensitive to downsampling stride.</span>\n                </div>\n                <div class=\"p-3 rounded-xl border border-slate-200 bg-slate-50\">\n                  <strong class=\"text-slate-900 block mb-0.5\">Rolling Scratches & Fractures:</strong>\n                  <span class=\"text-slate-600 text-[11px]\">Highly elongated, narrow width (1\u20133 px), large aspect ratios. Requires high spatial resolution.</span>\n                </div>\n                <div class=\"p-3 rounded-xl border border-slate-200 bg-slate-50\">\n                  <strong class=\"text-slate-900 block mb-0.5\">Oxide Scale & Surface Blotches:</strong>\n                  <span class=\"text-slate-600 text-[11px]\">Massive, diffuse regional patches. Requires wide receptive fields and global context.</span>\n                </div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] font-mono mb-3\">Candidate Architectural Strategies</div>\n              <ul class=\"space-y-3.5 text-slate-700 leading-relaxed\">\n                <li class=\"flex items-start gap-2.5\">\n                  <span class=\"w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0\"></span>\n                  <span><strong>Encoder-Decoder with Skip Connections (e.g., U-Net):</strong> Transfers high-resolution feature maps across resolution levels, helping retain thin spatial boundaries that would otherwise vanish in deep bottlenecks.</span>\n                </li>\n                <li class=\"flex items-start gap-2.5\">\n                  <span class=\"w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0\"></span>\n                  <span><strong>Feature Pyramid Networks (FPN):</strong> Constructs multi-scale feature representations, allowing predictions at multiple semantic strides.</span>\n                </li>\n                <li class=\"flex items-start gap-2.5\">\n                  <span class=\"w-1.5 h-1.5 rounded-full bg-indigo-600 mt-1.5 shrink-0\"></span>\n                  <span><strong>Dilated / Atrous Convolutions (e.g., DeepLab):</strong> Expands receptive field without reducing spatial grid resolution.</span>\n                </li>\n              </ul>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 5: Post-Processing", "title": "Section 5: Post-Processing & Graph Connectivity", "subtitle": "Connected Component Graphs, Area Filtering Trade-offs & Multi-Label Stratification (13 Minutes)", "notes": "Transition to Section 5. Discuss post-processing binarization, connected component neighborhoods, and validation splitting techniques.", "content": "\n        <div class=\"p-8 rounded-2xl border border-slate-200 bg-white space-y-6 shadow-sm my-4\">\n          <div class=\"max-w-3xl space-y-3\">\n            <span class=\"text-xs font-mono font-bold text-indigo-600 uppercase tracking-widest block\">Module 5 of 6</span>\n            <h2 class=\"text-2xl md:text-3xl font-extrabold text-slate-900\">\n              Post-Processing & Graph Connectivity\n            </h2>\n            <p class=\"text-sm text-slate-600 leading-relaxed\">\n              Investigating graph connectivity on a 2D pixel lattice, uncovering the fatal noise-filter trap on real diagonal scratches, engineering multi-label validation stratification, and sweeping decision thresholds against composite metrics.\n            </p>\n          </div>\n\n          <div class=\"grid grid-cols-1 md:grid-cols-2 gap-5 text-xs font-mono\">\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Graph Connectivity:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 4-Connectivity vs 8-Connectivity Neighborhoods</div>\n                <div>\u2022 Connected Component Labeling (`cv2.connectedComponents`)</div>\n                <div>\u2022 Area Thresholding vs Recall Ceilings</div>\n              </div>\n            </div>\n\n            <div class=\"p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2\">\n              <strong class=\"text-slate-900 text-sm block mb-1\">Validation & Inference:</strong>\n              <div class=\"text-slate-700 space-y-1.5\">\n                <div>\u2022 Multi-Label Combination Stratification</div>\n                <div>\u2022 Protecting Rare Classes Across Folds</div>\n                <div>\u2022 Probability Threshold Sweeping ($\\tau \\in [0, 1]$)</div>\n              </div>\n            </div>\n          </div>\n        </div>\n        "}, {"module": "Section 5: Post-Processing", "title": "4-Connectivity vs 8-Connectivity: The Chess Analogy", "subtitle": "How pixel adjacency definitions alter connected component graphs", "notes": "Use the chess analogy: 4-connectivity is Rook moves (only horizontal and vertical edge sharing). 8-connectivity is King moves (all 8 neighbors including diagonals). Diagonal scratches do not touch on edges!", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex justify-between items-center mb-2\">\n                <h3 class=\"text-base font-bold text-slate-900\">4-Connectivity (The Rook)</h3>\n                <span class=\"text-[10px] font-mono text-slate-500 bg-slate-100 px-2 py-0.5 rounded\">Edges Only</span>\n              </div>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Two active pixels are connected if and only if they share a common <strong>edge</strong> (North, South, East, West).\n              </p>\n              <div class=\"p-4 bg-slate-50 rounded-xl border border-slate-200 font-mono text-xs text-center mb-3\">\n                <div class=\"grid grid-cols-3 gap-2 max-w-[140px] mx-auto text-xs py-1\">\n                  <div class=\"p-2 bg-white rounded border border-slate-200 text-slate-400\">0</div>\n                  <div class=\"p-2 bg-slate-900 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-white rounded border border-slate-200 text-slate-400\">0</div>\n                  <div class=\"p-2 bg-slate-900 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-indigo-100 text-indigo-900 font-bold rounded border border-indigo-300\">P</div>\n                  <div class=\"p-2 bg-slate-900 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-white rounded border border-slate-200 text-slate-400\">0</div>\n                  <div class=\"p-2 bg-slate-900 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-white rounded border border-slate-200 text-slate-400\">0</div>\n                </div>\n              </div>\n              <p class=\"text-[11px] text-rose-600\">\n                Diagonally adjacent pixels are deemed completely disconnected.\n              </p>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-indigo-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"flex justify-between items-center mb-2\">\n                <h3 class=\"text-base font-bold text-slate-900\">8-Connectivity (The King)</h3>\n                <span class=\"text-[10px] font-mono text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded font-bold border border-indigo-200\">Edges + Corners</span>\n              </div>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Two active pixels are connected if they share an <strong>edge OR a corner vertex</strong> (all 8 surrounding neighbors).\n              </p>\n              <div class=\"p-4 bg-indigo-50/50 rounded-xl border border-indigo-200 font-mono text-xs text-center mb-3\">\n                <div class=\"grid grid-cols-3 gap-2 max-w-[140px] mx-auto text-xs py-1\">\n                  <div class=\"p-2 bg-indigo-600 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-indigo-600 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-indigo-600 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-indigo-600 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-white text-indigo-900 font-bold rounded border border-indigo-300\">P</div>\n                  <div class=\"p-2 bg-indigo-600 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-indigo-600 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-indigo-600 text-white font-bold rounded\">1</div>\n                  <div class=\"p-2 bg-indigo-600 text-white font-bold rounded\">1</div>\n                </div>\n              </div>\n              <p class=\"text-[11px] text-emerald-700 font-bold\">\n                Diagonal pixel paths remain unified into single continuous graph components.\n              </p>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 5: Post-Processing", "title": "Morphological Area Filtering & The Recall Ceiling", "subtitle": "Balancing spurious noise removal against accidental defect deletion", "notes": "Discuss minimum area filtering: discarding components smaller than N pixels. Explain that if genuine defects are small, or if 4-connectivity fragments diagonal cracks, filtering introduces an artificial recall ceiling.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Minimum Area Post-Processing</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                Probability maps often produce isolated false-positive noise pixels. A common post-processing heuristic is:\n              </p>\n              <div class=\"p-3 bg-slate-50 rounded-xl border border-slate-200 font-mono text-xs text-center text-slate-800 mb-3\">\n                $$\\text{Discard Component if Area } < N \\text{ pixels}$$\n              </div>\n              <p class=\"text-xs text-slate-600 leading-relaxed\">\n                Applied via <code>cv2.connectedComponentsWithStats(mask, connectivity=8)</code>.\n              </p>\n            </div>\n            <div class=\"p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600\">\n              <strong>OpenCV Parameter Notice:</strong> Ensure connectivity is passed as a keyword argument (<code>connectivity=8</code>) to avoid argument misalignment in OpenCV bindings.\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 text-xs shadow-sm flex flex-col justify-between\">\n            <div>\n              <div class=\"text-slate-500 font-bold uppercase tracking-wider text-[11px] font-mono mb-3\">The Recall Ceiling Trade-off</div>\n              <div class=\"space-y-3\">\n                <div class=\"p-3.5 bg-white rounded-xl border border-slate-200\">\n                  <strong class=\"text-slate-900 block mb-1\">Small Defect Loss:</strong>\n                  <p class=\"text-slate-600 text-[11px] leading-relaxed\">If ground-truth defect instances have native pixel areas smaller than $N$, the filter discards genuine defects, imposing an upper bound on model recall.</p>\n                </div>\n                <div class=\"p-3.5 bg-white rounded-xl border border-slate-200\">\n                  <strong class=\"text-slate-900 block mb-1\">Connectivity Sensitivity:</strong>\n                  <p class=\"text-slate-600 text-[11px] leading-relaxed\">Under 4-connectivity, thin diagonal cracks shatter into multiple micro-components that individually fall below $N$, causing the entire defect to be deleted.</p>\n                </div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 5: Post-Processing", "title": "Validation Stratification & Threshold Sweeping", "subtitle": "Partitioning multi-label datasets and tuning decision threshold \u03c4", "notes": "Explain why MultilabelStratifiedKFold is required for rare classes. Then explain threshold sweeping: metrics with explicit false positive penalties tend to favor higher decision thresholds.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Multi-Label Stratification</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-4\">\n                When defect prevalence is highly skewed across classes, random splitting can leave validation folds with zero occurrences of rare categories.\n              </p>\n              <div class=\"p-4 bg-slate-50 rounded-xl border border-slate-200 font-mono text-xs space-y-2\">\n                <div class=\"text-slate-500 text-[11px]\">Combination Stratification Strategy:</div>\n                <p class=\"text-slate-700 text-[11px]\">Assign each physical image a composite signature string (e.g., <code>\"clean\"</code>, <code>\"defect_c\"</code>, <code>\"defect_a+defect_c\"</code>) and stratify across these composite strata.</p>\n                <div class=\"text-indigo-700 font-bold text-[11px] pt-1\">Tool: iterative-stratification / MultilabelStratifiedKFold</div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-slate-50/60 space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <h3 class=\"text-base font-bold text-slate-900 mb-2\">Decision Threshold Sweeping</h3>\n              <p class=\"text-xs text-slate-600 leading-relaxed mb-3\">\n                Continuous sigmoid outputs $P(y=1) \\in [0, 1]$ are binarized via decision threshold $\\tau$:\n              </p>\n              <div class=\"border border-slate-200 rounded-xl overflow-hidden text-xs mb-3\">\n                <table class=\"w-full text-left font-mono\">\n                  <thead class=\"bg-slate-100/70 border-b border-slate-200 text-slate-700\">\n                    <tr>\n                      <th class=\"p-2\">Threshold Setting</th>\n                      <th class=\"p-2\">Operating Characteristic</th>\n                      <th class=\"p-2\">Evaluation Effect</th>\n                    </tr>\n                  </thead>\n                  <tbody class=\"divide-y divide-slate-100 text-slate-800 text-[11px]\">\n                    <tr>\n                      <td class=\"p-2 font-bold\">Lower $\\tau$</td>\n                      <td class=\"p-2\">Higher Recall</td>\n                      <td class=\"p-2 text-rose-600\">Increases false alarms on clean plates</td>\n                    </tr>\n                    <tr>\n                      <td class=\"p-2 font-bold text-indigo-700\">Higher $\\tau$</td>\n                      <td class=\"p-2 font-bold text-indigo-700\">Higher Precision</td>\n                      <td class=\"p-2 text-emerald-700 font-bold\">Protects false-positive penalty terms</td>\n                    </tr>\n                  </tbody>\n                </table>\n              </div>\n            </div>\n\n            <div class=\"p-3 bg-white rounded-xl border border-slate-200 text-[11px] text-slate-600\">\n              <strong>Observation:</strong> Metrics that heavily penalize false-positive noise on negative samples naturally favor more conservative decision thresholds compared to unweighted metrics.\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Section 6: Action Plan", "title": "Section 6: Engineering Action Plan & Immediate Steps", "subtitle": "Essential setup, baseline verification, and pipeline unit testing", "notes": "Transition to Section 6. Give students their immediate engineering checklist: 1) Verify pipeline and baseline scoring. 2) Unit test Fortran RLE round-trip. 3) Run local data integrity audits. 4) Set up experiment tracking.", "content": "\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-8 py-4 items-stretch\">\n          \n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <span class=\"text-xs font-mono font-bold text-indigo-600 block mb-1\">STEPS 1 & 2</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-3\">Pipeline Verification</h3>\n              <div class=\"space-y-3 text-xs text-slate-700\">\n                <div class=\"p-3.5 bg-slate-50 rounded-xl border border-slate-200\">\n                  <strong class=\"text-slate-900 block mb-1\">1. Verify Scoring & Submission Pipeline:</strong>\n                  Generate a baseline submission with all-empty predictions to confirm your local metric and remote submission pipeline function end-to-end.\n                </div>\n                <div class=\"p-3.5 bg-slate-50 rounded-xl border border-slate-200\">\n                  <strong class=\"text-slate-900 block mb-1\">2. Unit Test Fortran RLE Round-Trip:</strong>\n                  Implement <code>rle_to_mask</code> and <code>mask_to_rle</code>. Assert exact round-trip equality: <code>assert np.array_equal(mask, decoded)</code>.\n                </div>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm flex flex-col justify-between\">\n            <div>\n              <span class=\"text-xs font-mono font-bold text-indigo-600 block mb-1\">STEPS 3 & 4</span>\n              <h3 class=\"text-base font-bold text-slate-900 mb-3\">Audit & Tracking</h3>\n              <div class=\"space-y-3 text-xs text-slate-700\">\n                <div class=\"p-3.5 bg-slate-50 rounded-xl border border-slate-200\">\n                  <strong class=\"text-slate-900 block mb-1\">3. Run Local Data Integrity Audits:</strong>\n                  Verify on your local dataset the spatial overlap across channels, image-level cardinality distributions, and RLE string boundary constraints.\n                </div>\n                <div class=\"p-3.5 bg-slate-50 rounded-xl border border-slate-200\">\n                  <strong class=\"text-slate-900 block mb-1\">4. Experiment Tracking Setup:</strong>\n                  Initialize your tracking workspace (e.g., Weights & Biases) to log exploratory data statistics, validation splits, and upcoming training runs.\n                </div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n        "}, {"module": "Open Discussion", "title": "Open Discussion & Technical Q&A", "subtitle": "SurfaceGuard AI \u2022 First-Principles Vision Lab \u2022 BSDA2001P", "notes": "Open the floor for questions. Invite questions on RLE encoding, composite metric trade-offs, connectivity mechanics, or model architecture.", "content": "\n        <div class=\"flex flex-col items-center justify-center text-center py-12 space-y-6\">\n          <div class=\"inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-indigo-200 bg-indigo-50/70 text-indigo-700 text-xs font-semibold tracking-wide\">\n            Interactive Discussion Window\n          </div>\n          <h2 class=\"text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight\">\n            Questions & Technical Clarifications\n          </h2>\n          <p class=\"text-sm text-slate-600 max-w-xl leading-relaxed\">\n            The floor is now open for questions regarding Fortran memory layouts, composite metric optimization, receptive field selection, or post-processing graphs.\n          </p>\n          <div class=\"p-4 rounded-xl border border-slate-200 bg-slate-50/80 text-xs font-mono text-slate-600 max-w-md shadow-sm\">\n            <div>Reference Playbook: <span class=\"text-slate-900 font-semibold\">SESSION_1_REFERENCE_PLAYBOOK.md</span></div>\n          </div>\n        </div>\n        "}];
+    const modules = [{"name": "Overview", "slide": 0}, {"name": "1. Geometry & Memory", "slide": 3}, {"name": "2. Cardinality & Heads", "slide": 8}, {"name": "3. Measurement Crisis", "slide": 13}, {"name": "4. Contrast vs Texture", "slide": 18}, {"name": "5. Post-Processing", "slide": 21}, {"name": "6. Action Plan", "slide": 25}];
+    let currentSlide = 0;
+
+    // -------------------------------------------------------------
+    // RLE Interactive Laboratory State (Slide 8)
+    // -------------------------------------------------------------
+    const GRID_ROWS = 8;
+    const GRID_COLS = 8;
+    let rleGrid = new Array(GRID_ROWS * GRID_COLS).fill(0);
+    let rleOrder = 'F'; // 'F' = Column-Major, 'C' = Row-Major
+
+    function initRleGrid() {
+      const container = document.getElementById('rle-grid');
+      if (!container) return;
+
+      container.innerHTML = '';
+      for (let r = 0; r < GRID_ROWS; r++) {
+        for (let c = 0; c < GRID_COLS; c++) {
+          const idx = r * GRID_COLS + c;
+          const cell = document.createElement('div');
+          cell.id = `cell-${idx}`;
+          cell.className = `grid-cell ${rleGrid[idx] ? 'active' : 'inactive'}`;
+          
+          // Display coordinate or 1-based index based on order
+          const labelIndex = rleOrder === 'F' ? (c * GRID_ROWS + r + 1) : (idx + 1);
+          cell.innerText = labelIndex;
+          cell.onclick = () => toggleCell(r, c);
+          container.appendChild(cell);
+        }
+      }
+
+      initMemoryTape();
+      computeRle();
+    }
+
+    function toggleCell(r, c) {
+      const idx = r * GRID_COLS + c;
+      rleGrid[idx] = rleGrid[idx] ? 0 : 1;
+      updateGridVisuals();
+      computeRle();
+    }
+
+    function updateGridVisuals() {
+      for (let r = 0; r < GRID_ROWS; r++) {
+        for (let c = 0; c < GRID_COLS; c++) {
+          const idx = r * GRID_COLS + c;
+          const cell = document.getElementById(`cell-${idx}`);
+          if (cell) {
+            cell.className = `grid-cell ${rleGrid[idx] ? 'active' : 'inactive'}`;
+            const labelIndex = rleOrder === 'F' ? (c * GRID_ROWS + r + 1) : (idx + 1);
+            cell.innerText = labelIndex;
+          }
+        }
+      }
+    }
+
+    function initMemoryTape() {
+      const tape = document.getElementById('rle-memory-tape');
+      if (!tape) return;
+      tape.innerHTML = '';
+      for (let i = 1; i <= GRID_ROWS * GRID_COLS; i++) {
+        const chip = document.createElement('span');
+        chip.id = `tape-chip-${i}`;
+        chip.className = 'tape-chip inactive';
+        chip.innerText = i;
+        tape.appendChild(chip);
+      }
+    }
+
+    function computeRle() {
+      const tape = document.getElementById('rle-memory-tape');
+      const outputBox = document.getElementById('rle-output-string');
+      const statsBox = document.getElementById('rle-stats');
+      if (!outputBox) return;
+
+      // 1D linear array in specified order
+      const linear = [];
+      if (rleOrder === 'F') {
+        // Column-major: traverse col by col, row by row
+        for (let c = 0; c < GRID_COLS; c++) {
+          for (let r = 0; r < GRID_ROWS; r++) {
+            linear.push(rleGrid[r * GRID_COLS + c]);
+          }
+        }
+      } else {
+        // Row-major: traverse row by row, col by col
+        for (let r = 0; r < GRID_ROWS; r++) {
+          for (let c = 0; c < GRID_COLS; c++) {
+            linear.push(rleGrid[r * GRID_COLS + c]);
+          }
+        }
+      }
+
+      // Update 1D tape chips
+      for (let i = 0; i < linear.length; i++) {
+        const chip = document.getElementById(`tape-chip-${i + 1}`);
+        if (chip) {
+          chip.className = `tape-chip ${linear[i] ? 'active' : 'inactive'}`;
+        }
+      }
+
+      // Compute runs (1-based index)
+      const runs = [];
+      let inRun = false;
+      let runStart = 0;
+      let runLen = 0;
+      let activeCount = 0;
+
+      for (let i = 0; i < linear.length; i++) {
+        if (linear[i] === 1) {
+          activeCount++;
+          if (!inRun) {
+            inRun = true;
+            runStart = i + 1; // 1-indexed
+            runLen = 1;
+          } else {
+            runLen++;
+          }
+        } else {
+          if (inRun) {
+            runs.push(`${runStart} ${runLen}`);
+            inRun = false;
+          }
+        }
+      }
+      if (inRun) {
+        runs.push(`${runStart} ${runLen}`);
+      }
+
+      const rleStr = runs.length > 0 ? runs.join(' ') : 'NaN (Clean)';
+      outputBox.innerText = rleStr;
+      statsBox.innerText = `${activeCount} active pixels • ${runs.length} run${runs.length === 1 ? '' : 's'}`;
+    }
+
+    function setRlePreset(type) {
+      rleGrid.fill(0);
+      if (type === 'vertical') {
+        // Column 2 completely active (rows 0 to 7)
+        for (let r = 0; r < GRID_ROWS; r++) {
+          rleGrid[r * GRID_COLS + 2] = 1;
+        }
+      } else if (type === 'horizontal') {
+        // Row 3 completely active (cols 0 to 7)
+        for (let c = 0; c < GRID_COLS; c++) {
+          rleGrid[3 * GRID_COLS + c] = 1;
+        }
+      } else if (type === 'diagonal') {
+        // Diagonal streak
+        for (let i = 1; i < 7; i++) {
+          rleGrid[i * GRID_COLS + i] = 1;
+        }
+      } else if (type === 'pits') {
+        // Isolated inclusions
+        rleGrid[1 * GRID_COLS + 2] = 1;
+        rleGrid[2 * GRID_COLS + 5] = 1;
+        rleGrid[6 * GRID_COLS + 3] = 1;
+      }
+      updateGridVisuals();
+      computeRle();
+    }
+
+    function setRleOrder(order) {
+      rleOrder = order;
+      const btnF = document.getElementById('btn-order-f');
+      const btnC = document.getElementById('btn-order-c');
+      const label = document.getElementById('rle-order-label');
+
+      if (order === 'F') {
+        btnF.className = 'px-3 py-1 rounded-md font-bold bg-indigo-600 text-white shadow-sm transition';
+        btnC.className = 'px-3 py-1 rounded-md font-bold text-slate-700 hover:text-slate-900 transition';
+        label.innerText = 'Top-to-Bottom, Col-by-Col (Official)';
+      } else {
+        btnC.className = 'px-3 py-1 rounded-md font-bold bg-indigo-600 text-white shadow-sm transition';
+        btnF.className = 'px-3 py-1 rounded-md font-bold text-slate-700 hover:text-slate-900 transition';
+        label.innerText = 'Left-to-Right, Row-by-Row (C Order)';
+      }
+      updateGridVisuals();
+      computeRle();
+    }
+
+    // -------------------------------------------------------------
+    // Slide Navigation & Rendering
+    // -------------------------------------------------------------
+    function renderSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= slides.length) index = slides.length - 1;
+      currentSlide = index;
+
+      const slide = slides[currentSlide];
+      document.getElementById('slide-module-tag').innerText = slide.module;
+      document.getElementById('slide-counter-badge').innerText = `Slide ${String(currentSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      document.getElementById('slide-title').innerText = slide.title;
+      document.getElementById('slide-subtitle').innerText = slide.subtitle;
+      document.getElementById('slide-content').innerHTML = slide.content;
+      document.getElementById('slide-dropdown').value = currentSlide;
+
+      // Update module tabs active state
+      updateModuleTabs();
+
+      // Update presenter notes
+      document.getElementById('notes-content').innerHTML = `
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-2 font-mono text-[11px] text-slate-500">
+          Slide ${currentSlide + 1} Cue • ${slide.module}
+        </div>
+        <p class="text-slate-700 text-xs leading-relaxed">${slide.notes}</p>
+      `;
+
+      // Render math formulas via KaTeX auto-render with inline $ support
+      renderMath();
+
+      // Initialize icons
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+
+      // If rendering Slide 8 (RLE Lab), initialize interactive grid
+      if (document.getElementById('rle-grid')) {
+        if (rleGrid.every(v => v === 0)) {
+          setRlePreset('vertical');
+        } else {
+          initRleGrid();
+        }
+      }
+
+      // Auto-initialize calculator if on Slide 18
+      if (document.getElementById('calc-fg-slider')) {
+        updateMetricSimulator();
+      }
+    }
+
+    function renderMath() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById('slide-content'), {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError: false,
+          ignoredTags: ['script', 'noscript', 'style', 'textarea']
+        });
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        renderSlide(currentSlide + 1);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        renderSlide(currentSlide - 1);
+      }
+    }
+
+    function jumpToSlide(index) {
+      renderSlide(index);
+    }
+
+    function toggleNotesDrawer() {
+      const drawer = document.getElementById('notes-drawer');
+      drawer.classList.toggle('hidden');
+      drawer.classList.toggle('flex');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log(err));
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    function updateModuleTabs() {
+      const tabButtons = document.querySelectorAll('.nav-module-btn');
+      let activeModuleIndex = 0;
+      for (let i = modules.length - 1; i >= 0; i--) {
+        if (currentSlide >= modules[i].slide) {
+          activeModuleIndex = i;
+          break;
+        }
+      }
+      tabButtons.forEach((btn, idx) => {
+        if (idx === activeModuleIndex) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key.toLowerCase() === 'm') {
+        toggleNotesDrawer();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+      } else if (e.key === 'Home') {
+        renderSlide(0);
+      } else if (e.key === 'End') {
+        renderSlide(slides.length - 1);
+      }
+    });
+
+    // Initialize dropdown & tabs on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      // Populate module navigation tabs
+      const navContainer = document.getElementById('module-tabs');
+      navContainer.innerHTML = modules.map((m, idx) => 
+        `<button onclick="jumpToSlide(${m.slide})" class="nav-module-btn px-3 py-1 rounded-lg transition whitespace-nowrap">${m.name}</button>`
+      ).join('');
+
+      // Populate slide jump dropdown
+      const dropdown = document.getElementById('slide-dropdown');
+      dropdown.innerHTML = slides.map((s, idx) => 
+        `<option value="${idx}">${String(idx + 1).padStart(2, '0')}. ${s.title.substring(0, 38)}...</option>`
+      ).join('');
+
+      renderSlide(0);
+    });
+
+    // Metric Simulator handler for Slide 18
+    function updateMetricSimulator() {
+      const fg = parseFloat(document.getElementById('calc-fg-slider').value);
+      const fp = parseFloat(document.getElementById('calc-fp-slider').value);
+      const ea = parseFloat(document.getElementById('calc-ea-slider').value);
+
+      document.getElementById('calc-fg-val').innerText = fg.toFixed(2);
+      document.getElementById('calc-fp-val').innerText = fp.toFixed(2);
+      document.getElementById('calc-ea-val').innerText = ea.toFixed(2);
+
+      const total = (0.70 * fg) + (0.20 * fp) + (0.10 * ea);
+      document.getElementById('calc-score').innerText = total.toFixed(4);
+    }
+
+    function setMetricPreset(type) {
+      if (type === 'empty') {
+        document.getElementById('calc-fg-slider').value = 0.0;
+        document.getElementById('calc-fp-slider').value = 1.0;
+        document.getElementById('calc-ea-slider').value = 1.0;
+      } else if (type === 'balanced') {
+        document.getElementById('calc-fg-slider').value = 0.85;
+        document.getElementById('calc-fp-slider').value = 0.90;
+        document.getElementById('calc-ea-slider').value = 0.60;
+      }
+      updateMetricSimulator();
+    }
+  </script>
+</body>
+</html>
